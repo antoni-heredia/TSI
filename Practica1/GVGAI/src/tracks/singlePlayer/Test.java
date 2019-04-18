@@ -50,6 +50,7 @@ public class Test {
 
 		// 2. This plays a game in a level by the controller.
 		String controlador = "practica_busqueda.Agent";
+//
 		ArcadeMachine.runOneGame(game, level1, visuals, controlador, recordActionsFile, seed, 0);
 
 

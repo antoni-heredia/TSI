@@ -1,6 +1,5 @@
 package practica_busqueda;
 
-import core.game.Observation;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
 import ontology.Types;
@@ -11,134 +10,142 @@ import tools.pathfinder.PathFinder;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Random;
 
-public class Agent extends AbstractPlayer {
-    PathFinder pf;
-    Vector2d fescala;
-    Vector2d ultimaPos;
-    private ArrayList<Node> path  = new ArrayList<>();
-    public Agent (StateObservation stateObs, ElapsedCpuTimer elapsedTimer) {
+public class Agent extends BaseAgent {
+    private ArrayList<Types.ACTIONS> lista_acciones; // Conjunto de acciones posibles
+    private Random generador;
+    Observation gemaCercana;
+    boolean hayPLan;
+    Nodo plan;
 
-        //Creamos una lista de IDs de obstaculos
-        ArrayList<Observation>[] obstaculos = stateObs.getImmovablePositions();
-
-        ArrayList<Integer> tiposObs = new ArrayList<Integer>();
-        for(ArrayList<Observation> obs:obstaculos){
-            tiposObs.add(obs.get(0).obsID);
-        }
-
-        tiposObs.add((int)'o');
-
-        //Se inicializa el objeto pf con las ids de los obstaculos
-
-        pf = new PathFinder(tiposObs);
-
-        pf.VERBOSE = false; //<- Activa o desactiva el modo la impresion del log
-
-        //Se lanza el algoritmo de pathfinding para poder ser usado en ACT
-        pf.run(stateObs);
-
-        //Calculamos el factor de escala entre mundo
-
-        fescala = new Vector2d((double) stateObs.getWorldDimension().width / stateObs.getObservationGrid().length,
-                (double) stateObs.getWorldDimension().height / stateObs.getObservationGrid()[0].length);
-
-        //Ultima posicion del avatar
-
-        ultimaPos = new Vector2d(stateObs.getAvatarPosition().x/fescala.x,
-                stateObs.getAvatarPosition().y / fescala.y);
-    };
-    public void init(StateObservation stateObs, ElapsedCpuTimer elapsedTimer){};
+    public Agent(StateObservation so, ElapsedCpuTimer elapsedTimer){
+        super(so, elapsedTimer);
+        gemaCercana = null;
+        hayPLan = false;
+        plan = null;
+    }
 
     @Override
     public Types.ACTIONS act(StateObservation stateObs, ElapsedCpuTimer elapsedTimer){
-        //Obtenemos la posicion del avatar
-        Vector2d avatar =  new Vector2d(stateObs.getAvatarPosition().x / fescala.x, stateObs.getAvatarPosition().y / fescala.y);
-        //System.out.println("Posición del avatar: " + avatar.toString());
-        //System.out.println("Ultima posición: " + ultimaPos);
-        //System.out.println("Ultima acción: " + ultimaAccion);
+        ArrayList<Observation> gemas;
+        PlayerObservation jugador_antiguo = getPlayer(stateObs);
 
-
-        //Actualizamos el plan de ruta
-        if(((avatar.x != ultimaPos.x) || (avatar.y != ultimaPos.y)) && !path.isEmpty()){
-            path.remove(0);
-        }
-
-        //Calculamos el numero de gemas que lleva encima
-        int nGemas = 0;
-        if(stateObs.getAvatarResources().isEmpty() != true){
-            nGemas = stateObs.getAvatarResources().get(6);
-        }
-
-        //Si no hay un plan de ruta calculado...
-        if(path.isEmpty()){
-            //Si ya tiene todas las gemas se calcula uno al portal más cercano. Si no se calcula a la gema más cercana
-            if(nGemas == 10){
-                Vector2d portal;
-
-                //Se crea una lista de observaciones de portales, ordenada por cercania al avatar
-                ArrayList<Observation>[] posiciones = stateObs.getPortalsPositions(stateObs.getAvatarPosition());
-
-                //Se seleccionan el portal más cercano
-                portal = posiciones[0].get(0).position;
-
-                //Se le aplica el factor de escala para que las coordenas de pixel coincidan con las coordenadas del grig
-                portal.x = portal.x / fescala.x;
-                portal.y = portal.y / fescala.y;
-
-                //Calculamos un camino desde la posición del avatar a la posición del portal
-                path = pf.getPath(avatar, portal);
-            }
+        if (getRemainingGems(stateObs) > 0){
+            gemas = getGemsList(stateObs);
+            if(gemaCercana == null)
+                gemaCercana = getGemaCercana(gemas,jugador_antiguo);
             else{
-                Vector2d gema;
 
-                //Se crea una lista de observaciones, ordenada por cercania al avatar
-                ArrayList<Observation>[] posiciones = stateObs.getResourcesPositions(stateObs.getAvatarPosition());
-
-                //Se selecciona la gema más cercana
-                gema = posiciones[0].get(0).position;
-
-                //Se le aplica el factor de escala para que las coordenas de pixel coincidan con las coordenadas del grig
-                gema.x = gema.x / fescala.x;
-                gema.y = gema.y / fescala.y;
-
-
-                //Calculamos un camino desde la posición del avatar a la posición de la gema
-                path = pf.getPath(avatar, gema);
-            }
-        }
-
-
-        if(path != null){
-            Types.ACTIONS siguienteAccion;
-            Node siguientePos = path.get(0);
-
-            //Se determina el siguiente movimiento a partir de la posición del avatar
-            if(siguientePos.position.x != avatar.x){
-                if (siguientePos.position.x > avatar.x) {
-                    siguienteAccion = Types.ACTIONS.ACTION_RIGHT;
-                }else{
-                    siguienteAccion = Types.ACTIONS.ACTION_LEFT;
+                if(!hayPLan){
+                    plan = getPlan(gemaCercana,jugador_antiguo,stateObs);
+                    hayPLan = true;
                 }
-            }else{
-                if(siguientePos.position.y > avatar.y){
-                    siguienteAccion = Types.ACTIONS.ACTION_DOWN;
-                }else{
-                    siguienteAccion = Types.ACTIONS.ACTION_UP;
+
+                if(plan.getPadre() != null){
+                    System.out.println(plan.getPosicion().toString());
+                    plan = plan.getPadre();
                 }
+
             }
 
-            //Se actualiza la ultima posición del avatar
-            ultimaPos = avatar;
-
-            //Se devuelve la acción deseada
-            return siguienteAccion;
         }
-        else{
-            //Salida por defecto
-            return Types.ACTIONS.ACTION_NIL;
+        return Types.ACTIONS.ACTION_NIL;
+    }
+    private  Observation getGemaCercana( ArrayList<Observation> gemas, PlayerObservation jugador ){
+        //obtengo la distancia de la primera gema
+        int distanciaMinima = jugador.getManhattanDistance(gemas.get(0));;
+        Observation gemaCercana = gemas.get(0);
+        //elimino para no iterar sobre ella
+        gemas.remove(0);
+        //las recorro buscando la mas cercana
+        for (Observation gema_actual : gemas){
+            int distanciaActual = jugador.getManhattanDistance(gema_actual);
+            if( distanciaActual < distanciaMinima){
+                gemaCercana = gema_actual;
+                distanciaMinima = distanciaActual;
+            }
         }
+        return gemaCercana;
+    }
+    private Nodo getPlan( Observation gema, PlayerObservation jugador, StateObservation stateObs ) {
+        //obtengo todas las casillas
+        ArrayList<Observation>[][] mundoActual = getObservationGrid(stateObs);
+        //listas de nodos abiertos y cerrados
+        ArrayList<Nodo> abiertos = new ArrayList<Nodo>();
+        ArrayList<Nodo> cerrados = new ArrayList<Nodo>();
 
+        //meto el origen como nodo inicial
+        Observation posJug = new Observation(jugador.getX(), jugador.getY(), ObservationType.PLAYER);
+        Nodo destino = new Nodo(gema);
+        Nodo nJugador = new Nodo(posJug);
+        abiertos.add(nJugador);
+        Nodo actual = null;
+        do {
+            actual = nodoConMenorF(abiertos);
+            abiertos.remove(actual);
+            cerrados.add(actual);
+            if(actual.equals(destino))
+                return actual;
+            else {
+                ArrayList<Nodo> adyacentes = getAdyacentes(actual, mundoActual);
+                for (Nodo adyacente : adyacentes) {
+                    if (!abiertos.contains(adyacente) & !cerrados.contains(adyacente)) {
+                        setEcuacion(actual,adyacente);
+                        adyacente.setPadre(actual);
+                        abiertos.add(adyacente);
+                    }else{
+                        if(adyacente.getG()<actual.getG()){
+                            setEcuacion(actual,adyacente);
+                            adyacente.setPadre(actual);
+                        }
+                    }
+                }
+            }
+        } while (abiertos.size() != 0);
+
+        return null;
     }
 
+    private void setEcuacion(Nodo actual, Nodo adyacente){
+        float distancia_H = actual.getPosicion().getEuclideanDistance(adyacente.getPosicion());
+        int distancia_G = actual.getPosicion().getManhattanDistance(adyacente.getPosicion());
+        adyacente.setG(actual.getG()+distancia_G);
+        adyacente.setH(actual.getG()+distancia_H);
+        adyacente.setF(actual.getG()+actual.getH());
+    }
+    private Nodo nodoConMenorF(ArrayList<Nodo> nodos){
+        Nodo resultado = nodos.get(0);
+
+        if(nodos.size()>1)
+            for  (Nodo nodo : nodos) {
+                if(nodo.getF()< resultado.getF())
+                    resultado = nodo;
+            }
+        return resultado;
+    }
+    private ArrayList<Nodo> getAdyacentes(Nodo nodo,  ArrayList<Observation>[][] mundoActual){
+        ArrayList<Nodo> adyacentes = new ArrayList<Nodo>();
+        if(mundoActual[nodo.getX()+1][nodo.getY()].get(0).getType() != ObservationType.WALL &
+            mundoActual[nodo.getX()+1][nodo.getY()].get(0).getType() != ObservationType.SCORPION &
+            mundoActual[nodo.getX()+1][nodo.getY()].get(0).getType() != ObservationType.BOULDER &
+            mundoActual[nodo.getX()+1][nodo.getY()].get(0).getType() != ObservationType.BAT)
+            adyacentes.add(new Nodo(mundoActual[nodo.getX()+1][nodo.getY()].get(0)));
+        if(mundoActual[nodo.getX()-1][nodo.getY()].get(0).getType() != ObservationType.WALL &
+                mundoActual[nodo.getX()-1][nodo.getY()].get(0).getType() != ObservationType.SCORPION &
+                mundoActual[nodo.getX()-1][nodo.getY()].get(0).getType() != ObservationType.BOULDER &
+                mundoActual[nodo.getX()-1][nodo.getY()].get(0).getType() != ObservationType.BAT)
+            adyacentes.add(new Nodo(mundoActual[nodo.getX()-1][nodo.getY()].get(0)));
+        if(mundoActual[nodo.getX()][nodo.getY()+1].get(0).getType() != ObservationType.WALL &
+                mundoActual[nodo.getX()][nodo.getY()+1].get(0).getType() != ObservationType.SCORPION &
+                mundoActual[nodo.getX()][nodo.getY()+1].get(0).getType() != ObservationType.BOULDER &
+                mundoActual[nodo.getX()][nodo.getY()+1].get(0).getType() != ObservationType.BAT)
+            adyacentes.add(new Nodo(mundoActual[nodo.getX()][nodo.getY()+1].get(0)));
+        if(mundoActual[nodo.getX()][nodo.getY()-1].get(0).getType() != ObservationType.WALL &
+                mundoActual[nodo.getX()][nodo.getY()-1].get(0).getType() != ObservationType.SCORPION &
+                mundoActual[nodo.getX()][nodo.getY()-1].get(0).getType() != ObservationType.BOULDER &
+                mundoActual[nodo.getX()][nodo.getY()-1].get(0).getType() != ObservationType.BAT)
+            adyacentes.add(new Nodo(mundoActual[nodo.getX()][nodo.getY()-1].get(0)));
+        return adyacentes;
+    }
 }
