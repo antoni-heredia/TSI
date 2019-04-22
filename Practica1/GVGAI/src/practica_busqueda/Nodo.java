@@ -13,7 +13,23 @@ public class  Nodo {
         G = 0;
         F = 0;
     }
+    public Nodo(Nodo nodo){
+        if(nodo != null){
+            posicion = new Observation(nodo.getPosicion());
+            padre = new Nodo(nodo.getPadre());
+            H = nodo.getH();
+            G = nodo.getG();
+            F = nodo.getF();
+        }
 
+    }
+    public Nodo(){
+        posicion = null;
+        padre = null;
+        H = 0;
+        G = 0;
+        F = 0;
+    }
     public int getX(){
         return posicion.getX();
     }
@@ -61,7 +77,13 @@ public class  Nodo {
     public void setF(float f) {
         F = f;
     }
+    public void aniadir(Nodo nodo){
 
+            if(padre != null)
+                padre.aniadir(nodo);
+            else
+                padre = nodo;
+    }
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Nodo)

@@ -15,7 +15,11 @@ public class Observation {
         this.y = y;
         this.type = type;
     }
-    
+    public Observation(Observation obs){
+        this.x = obs.getX();
+        this.y = obs.getY();
+        this.type = obs.getType();
+    }
     public Observation(core.game.Observation obs, int blockSize){
         int itype = obs.itype;
         
