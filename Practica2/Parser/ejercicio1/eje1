@@ -1,0 +1,8 @@
+zonas:25
+H -> z1[bruja1-bruja] z2[] z3[] z5[leo1-leo] z10[oscar1-oscar] z11[] z14[principe1-principe] z20[] z21[princesa1-princesa]
+H -> z15[algoritmo1-algoritmos] z16[] z17[] z18[] z24[manzana1-manzanas] z23[]
+H -> z7[] z8[] z17[] z9[rosa1-rosas] z12[]
+V -> z15[algoritmo1-algoritmos] z6[] z5[leo1-leo] z4[] z7[]
+V -> z18[] z19[] z14[principe1-principe] z13[pepe-jugador] z12[]
+V -> z25[profesor1-profesor] z24[manzana1-manzanas]
+V -> z23[] z22[oro1-oro] z21[princesa1-princesa]
