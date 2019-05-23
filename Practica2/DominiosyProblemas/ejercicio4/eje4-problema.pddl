@@ -227,7 +227,7 @@ O - puntoCardinal
 (orientacionJug pepe S)
 (= (distanciaTotal) 0)
 )(:goal (AND 
-        (= (puntosTotales) (puntosMaximos))
+        (>= (puntosTotales) (puntosMaximos))
         )
   )
   (:metric minimize (distanciaTotal))

@@ -251,9 +251,9 @@ O - puntoCardinal
 (zonaVecina z21 z22 S)
 (= (distanciaTotal) 0)
 )(:goal (AND 
-        (= (puntosTotales) (puntosMaximos))
-        (= (puntosJugador player1) (puntosMinimoJugador player1))
-        (= (puntosJugador player2) (puntosMinimoJugador player2))
+        (>= (puntosTotales) (puntosMaximos))
+        (>= (puntosJugador player1) (puntosMinimoJugador player1))
+        (>= (puntosJugador player2) (puntosMinimoJugador player2))
         )
   )
   (:metric minimize (distanciaTotal))

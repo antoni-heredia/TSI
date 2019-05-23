@@ -108,21 +108,7 @@
             )
         )
     )
-    (:action IR-ZONA-OBJ-MOCHN-bikini-zapatillas
-        :parameters (?j - jugador ?z - zona ?z2 - zona ?o - puntoCardinal ?t - tiposSuelo ?obj - bikini ?obj2 - zapatillas)
-        :precondition (and (enZona ?j  ?z) (orientacionJug ?j ?o)(tipozona ?t ?z2 )(tieneObjetoJ ?obj  ?j )(tieneObjetoJ ?obj2  ?j )(zonaVecina ?z ?z2 ?o))
-        
-        :effect(and
-        
-            (when (or (= ?t Piedra)(= ?t Arena)(= ?t Agua)(= ?t Bosque))
-                (and
-                    (increase (distanciaTotal) (distancia ?z ?z2))
-                    (not(enZona ?j ?z))
-                    (enZona ?j ?z2)
-                )
-            )
-        )
-    )
+
     (:action COGER-OBJETO
         :parameters (?j - jugador ?z - zona ?o - objeto)
         :precondition (and (enZona ?j  ?z)(enZona ?o ?z) (not(manoOcupada  ?j)))
