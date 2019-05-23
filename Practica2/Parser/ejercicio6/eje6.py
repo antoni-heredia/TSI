@@ -7,6 +7,9 @@ Created on Tue May 21 14:57:53 2019
 """
 import os
 import re
+import sys
+ruta = sys.argv[1]
+rutapro = sys.argv[2]
 '''
 ruta = input("Introduce la ruta del fichero a procesar: ")
 rutapro = input("Introduce la ruta donde quieres que se guarde el fichero procesado: ")
@@ -44,7 +47,8 @@ first_line = first_line.split(":")
 cantZonas = first_line[1]
 
 first_line = f.readline().strip()
-
+first_line = f.readline().strip()
+first_line = f.readline().strip()
 
 
 
@@ -106,7 +110,27 @@ for i in listaPersonajes:
                 for ob in objetos:
                     if(x[1] == ob[0]):
                         pro.write("(= (puntosDa "+str(x[0])+" "+str(i[0])+") "+str(puntos[ob[1]][per[1]])+")"+os.linesep)
+first_line = f.readline().strip()
+personajes = re.findall('\[(.+?)\]', first_line,re.DOTALL)
 
+personajes = personajes[0].split()
+
+
+for i in personajes:
+    i = i.split(":")
+    pro.write("(= (tamanioBolsillo "+i[0]+") "+i[1]+")"+os.linesep)
+    pro.write("(= (cantidadObjetos "+i[0]+") "+str(0)+")"+os.linesep)
+    
+first_line = f.readline().strip()
+jugadores = re.findall('\[(.+?)\]', first_line,re.DOTALL)
+jugadores = jugadores[0].split()
+
+for i in jugadores:
+    i = i.split(":")
+    pro.write("(orientacionJug "+i[0]+" S)"+os.linesep)
+    pro.write("(= (puntosMinimoJugador "+i[0]+") "+i[1]+")"+os.linesep)
+    pro.write("(= (puntosJugador "+i[0]+") "+str(0)+")"+os.linesep)
+    
 listaObjetos = []
 listaZonas = []
 for linea in f:
@@ -170,7 +194,6 @@ for linea in f:
             distancia = zonas[indice+1]
         zonas.pop(0)               
         nombreZonaAnterior = nombreZona
-pro.write("(orientacionJug "+nombreJugador+" S)"+os.linesep)
 pro.write("(= (distanciaTotal) "+str(0)+")"+os.linesep)
 
 

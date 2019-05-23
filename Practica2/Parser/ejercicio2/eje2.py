@@ -7,6 +7,10 @@ Created on Tue May 21 14:57:53 2019
 """
 import os
 import re
+import sys
+ruta = sys.argv[1]
+rutapro = sys.argv[2]
+
 '''
 ruta = input("Introduce la ruta del fichero a procesar: ")
 rutapro = input("Introduce la ruta donde quieres que se guarde el fichero procesado: ")

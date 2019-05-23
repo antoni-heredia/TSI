@@ -21,6 +21,20 @@ puntos = [
         [4,3,1,10,5],
         [5,4,3,1,10],
         ]
+objetos = [
+        ["manzanas",2],
+        ["rosas",1],
+        ["oro",4],
+        ["algoritmos",3],
+        ["oscar",0],
+        ]
+personajes = [
+        ["bruja",2],
+        ["princesa",1],
+        ["principe",4],
+        ["profesor",3],
+        ["leo",0],
+        ]
 ruta = "eje2"
 rutapro = "eje2pro"
 
@@ -32,12 +46,17 @@ first_line = f.readline().strip()
 first_line = first_line.split(":")
 cantZonas = first_line[1]
 
+first_line = f.readline().strip()
+
+
 
 
 for i in range(int(cantZonas)):
     pro.write("z"+str(i+1)+" - zona"+os.linesep)
 listaObjetos = []
 listaTipos = []
+listaPersonajes = []
+listaPremios = []
 
 nombreJugador = "nombre"
 for linea in f:
@@ -54,6 +73,14 @@ for linea in f:
                 pro.write(str(separador[0])+" - "+str(separador[1])+os.linesep)
                 if(separador[1] == 'jugador'):
                     nombreJugador = separador[0]
+                for i in personajes:
+                    if(i[0]==separador[1]):
+                        if(any(separador[0] in s for s in listaPersonajes) == False):
+                            listaPersonajes.append([separador[0],separador[1]])
+                for i in objetos:
+                    if(i[0]==separador[1]):
+                        if(any(separador[0] in s for s in listaPremios) == False):
+                            listaPremios.append([separador[0],separador[1]])
         elif(len(objeto) == 1):
             tipoZona = objeto[0]
             tipoZona = tipoZona[ 2 : 2+len(tipoZona)]
@@ -70,6 +97,19 @@ pro.write(")"+os.linesep+"(:init "+os.linesep)
 
 f = open(ruta)
 first_line = f.readline().strip()
+first_line = f.readline().strip()
+first_line = first_line.split(":")
+puntosMaximos = first_line[1]
+pro.write("(= (puntosTotales) "+str(0)+")"+os.linesep)
+pro.write("(= (puntosMaximos) "+puntosMaximos+")"+os.linesep)
+for i in listaPersonajes:
+    for x in listaPremios:
+        for per in personajes:
+            if(i[1]==per[0]):
+                for ob in objetos:
+                    if(x[1] == ob[0]):
+                        pro.write("(= (puntosDa "+str(x[0])+" "+str(i[0])+") "+str(puntos[ob[1]][per[1]])+")"+os.linesep)
+
 listaObjetos = []
 listaZonas = []
 for linea in f:
@@ -118,7 +158,7 @@ for linea in f:
                 if(any(tipoZona in s for s in listaTipos) == False):
                     listaTipos.append(tipoZona)
                     pro.write("(tipoSuelo "+str(tipoZona)+" "+str(nombreZona)+ ")" +os.linesep)
-
+                
                 listaObjetos.append(separador[0])
                 pro.write("(enZona "+str(separador[0])+" "+str(nombreZona)+ ")" +os.linesep)
         else:

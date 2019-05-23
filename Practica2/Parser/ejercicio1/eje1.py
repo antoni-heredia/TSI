@@ -7,18 +7,23 @@ Created on Tue May 21 14:57:53 2019
 """
 import os
 import re
+import sys
+ 
+
 '''
 ruta = input("Introduce la ruta del fichero a procesar: ")
 rutapro = input("Introduce la ruta donde quieres que se guarde el fichero procesado: ")
 '''
-ruta = "eje1"
-rutapro = "eje1pro"
+ruta = sys.argv[1]
+rutapro = sys.argv[2]
 
 pro = open(rutapro, "w")
 pro.write("(define (problem eje1-test1)"+ os.linesep+"(:domain eje1-domain)"+os.linesep+"(:objects "+ os.linesep )
 
 f = open(ruta)
+
 first_line = f.readline().strip()
+
 first_line = first_line.split(":")
 cantZonas = first_line[1]
 for i in range(int(cantZonas)):
