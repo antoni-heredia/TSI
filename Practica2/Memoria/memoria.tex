@@ -54,7 +54,48 @@
 \tableofcontents % para generar el índice de contenidos
 \listoffigures
 \newpage
-
+\section{El mapa}
+El mapa que he usado para todos es el siguiente. Creo que con este mapa se puede cubrir todas los posibles casos que se den.
+\begin{figure}[H]
+	\centering
+	\includegraphics{images/mapa}
+	\caption{}
+	\label{fig:mapa}
+\end{figure}
+Los personajes en este mapa se encuentran en:\\
+\begin{tabular}{|c|c|}
+	\hline 
+	Personaje & Zona \\ 
+	\hline 
+	bruja1 & 1 \\ 
+	\hline 
+	profesor1 & 25 \\ 
+	\hline 
+	principe1 & 14 \\ 
+	\hline 
+	princesa1 & 21 \\ 
+	\hline 
+	leonardo & 5 \\ 
+	\hline 
+	jugador & 13 \\ 
+	\hline 
+\end{tabular}\\
+Los objetos se encuentran en las siguientes zonas: \\
+\begin{tabular}{|c|c|}
+	\hline 
+	\rule[-1ex]{0pt}{2.5ex} Objeto & Zona \\ 
+	\hline 
+	\rule[-1ex]{0pt}{2.5ex} oro1 & 22 \\ 
+	\hline 
+	\rule[-1ex]{0pt}{2.5ex} oscar1 & 19 \\ 
+	\hline 
+	\rule[-1ex]{0pt}{2.5ex} algoritmo1 & 15 \\ 
+	\hline 
+	\rule[-1ex]{0pt}{2.5ex} manzana1 & 24 \\ 
+	\hline 
+	\rule[-1ex]{0pt}{2.5ex} rosa1 & 9 \\ 
+	\hline 
+\end{tabular} 
 \section{Ejercicio 1}
 \subsection{Tipos}
 Tenemos definida la siguiente lista de tipos:
@@ -217,6 +258,81 @@ Ademas añadimos como ``metric'' que se minimize la distanciaTotal.
 
 \section{Ejercicio 3}
 En este ejercicio, existirán distintos tipos de zonas por las que el agente solo podra pasar con determinados objetos.
+\subsection{Mapa}
+El mapa sigue siendo el mismo, pero añadimos los nuevos objetos y los tipos de suelo. El color verde es el bosque, el color amarillo la arena, el color azul el agua y el color gris la piedra. Hay que tener en cuenta que hay objetos y personajes en la zona de bosque y agua. Para comprobar si se meten o no. 
+\begin{figure}[H]
+	\centering
+	\includegraphics{images/mapaPintadoNumeros}
+	\caption{}
+	\label{fig:mapa}
+\end{figure}
+Nuevos objetos:\\
+\begin{tabular}{|c|c|}
+	\hline 
+	Objeto & Zona \\ 
+	\hline 
+	bikini1 & 20 \\ 
+	\hline 
+	zapatillas1 & 4 \\ 
+	\hline 
+\end{tabular}\\\\
+Los tipos de suelo son:\\
+\begin{tabular}{|c|c|}
+	\hline 
+	Zona & Tipo \\ 
+	\hline 
+	1 & Piedra \\ 
+	\hline 
+	2 & Piedra \\ 
+	\hline 
+	3 & Piedra \\ 
+	\hline 
+	4 & Arena \\ 
+	\hline 
+	5 & Piedra \\ 
+	\hline 
+	6 & Agua \\ 
+	\hline 
+	7 & Bosque \\ 
+	\hline 
+	8 & Pricipicio \\ 
+	\hline 
+	9 & Bosque \\ 
+	\hline 
+	10 & Piedra \\ 
+	\hline 
+	11 & Piedra \\ 
+	\hline 
+	12 & Bosque \\ 
+	\hline 
+	13 & Bosque \\ 
+	\hline 
+	14 & Piedra \\ 
+	\hline 
+	15 & Agua \\ 
+	\hline 
+	16 & Agua \\ 
+	\hline 
+	17 & Agua \\ 
+	\hline 
+	18 & Agua \\ 
+	\hline 
+	19 & Agua \\ 
+	\hline 
+	20 & Piedra \\ 
+	\hline 
+	21 & Piedra \\ 
+	\hline 
+	22 & Agua \\ 
+	\hline 
+	23 & Agua \\ 
+	\hline 
+	24 & Agua \\ 
+	\hline 
+	25 & Agua \\ 
+	\hline 
+\end{tabular}\\
+
 \subsection{Tipos}
 En este ejercicio añadimos algunos tipos nuevos, que danto asi la lista de tipos:
 \begin{lstlisting}
@@ -510,4 +626,6 @@ El objetivo ahora ademas de tener una cantidad mínima de puntos totales necesar
 )
 \end{lstlisting}
 Ademas el parser añade los puntos minimos que necesita cada jugador y inicializa a 0 los puntos que tiene hasta ahora. 
+\section{Parser}
+El parser esta escrito en Python. Hay un parser y un fichero sin procesar y otro procesado del problema para cada ejercicio. Aunque he intentado realizarlo lo mejor posible, es muy rigido, es decir no te puedes dejar un espacio o lineas en blanco. No obstante funciona de forma adecuada para todos los ejercicios. La parte de los objetivos no la completa ya que entiendo que es algo que puede variar mucho mas entre ejercicio.
 \end{document}

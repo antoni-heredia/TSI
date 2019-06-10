@@ -1,0 +1,9 @@
+zonas:25
+puntos_totales:50
+H -> z1[bruja1-bruja][Piedra]=1=z2[][Piedra]=1=z3[][Piedra]=1=z5[leo1-leo][Piedra]=1=z10[oscar1-oscar][Piedra]=1=z11[][Piedra]=1=z14[principe1-principe][Piedra]=1=z20[bikini1 - bikini][Piedra]=1=z21[princesa1-princesa][Piedra]
+H -> z15[oscar2-oscar][Agua]=1=z16[][Agua]=1=z17[][Agua]=1=z18[][Agua]=11=z24[manzana1-manzanas][Agua]=11=z23[][Agua]
+H -> z7[][Bosque]=1=z8[][Precipicio]=1=z9[manzana2-manzanas][Bosque]=1=z12[][Bosque]
+V -> z15[oscar2-oscar][Agua]=1=z6[][Agua]=1=z5[leo1-leo][Piedra]=1=z4[zapatillas1 - zapatillas][Arena]=1=z7[][Bosque]
+V -> z18[][Agua]=1=z19[][Agua]=1=z14[principe1-principe][Piedra]=1=z13[pepe-jugador][Bosque]=1=z12[][Bosque]
+V -> z25[profesor1-profesor][Agua]=1=z24[manzana3-manzanas][Agua]
+V -> z23[][Agua]=1=z22[manzana1-manzanas][Agua]=1=z21[princesa1-princesa][Piedra]

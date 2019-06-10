@@ -1,0 +1,144 @@
+
+ff: parsing domain file
+domain 'EJE1-DOMAIN' defined
+ ... done.
+ff: parsing problem file
+problem 'EJE1-TEST1' defined
+ ... done.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+ff: search configuration is EHC, if that fails then  best-first on 1*g(s) + 5*h(s) where
+    metric is  plan length
+
+Cueing down from goal distance:   31 into depth [1]
+                                  29            [1][2][3][4][5]
+                                  28            [1]
+                                  27            [1][2][3][4][5]
+                                  26            [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15]
+                                  25            [1]
+                                  24            [1]
+                                  23            [1][2][3][4]
+                                  22            [1][2][3][4][5][6][7][8][9][10]
+                                  21            [1][2][3][4][5][6][7][8][9][10][11][12]
+                                  19            [1][2]
+                                  18            [1][2][3]
+                                  17            [1][2][3][4]
+                                  16            [1][2][3][4][5]
+                                  15            [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15]
+                                  14            [1]
+                                  13            [1]
+                                  12            [1]
+                                  11            [1][2]
+                                  10            [1]
+                                   9            [1]
+                                   8            [1]
+                                   7            [1][2]
+                                   6            [1]
+                                   5            [1]
+                                   4            [1]
+                                   3            [1]
+                                   2            [1]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: IR-ZONA PEPE Z13 Z14 S
+        1: GIROR-JUGADOR PEPE Z14 S
+        2: IR-ZONA PEPE Z14 Z11 O
+        3: IR-ZONA PEPE Z11 Z10 O
+        4: COGER-OBJETO PEPE Z10 OSCAR1
+        5: IR-ZONA PEPE Z10 Z5 O
+        6: ENTREGAR-OBJETO PEPE Z5 OSCAR1 LEO1
+        7: IR-ZONA PEPE Z5 Z3 O
+        8: IR-ZONA PEPE Z3 Z2 O
+        9: IR-ZONA PEPE Z2 Z1 O
+       10: GIROL-JUGADOR PEPE Z1 O
+       11: GIROL-JUGADOR PEPE Z1 S
+       12: IR-ZONA PEPE Z1 Z2 E
+       13: IR-ZONA PEPE Z2 Z3 E
+       14: IR-ZONA PEPE Z3 Z5 E
+       15: GIROL-JUGADOR PEPE Z5 E
+       16: IR-ZONA PEPE Z5 Z4 N
+       17: IR-ZONA PEPE Z4 Z7 N
+       18: GIROR-JUGADOR PEPE Z7 N
+       19: IR-ZONA PEPE Z7 Z8 E
+       20: IR-ZONA PEPE Z8 Z17 E
+       21: IR-ZONA PEPE Z17 Z9 E
+       22: COGER-OBJETO PEPE Z9 ROSA1
+       23: IR-ZONA PEPE Z9 Z12 E
+       24: GIROR-JUGADOR PEPE Z12 E
+       25: IR-ZONA PEPE Z12 Z13 S
+       26: IR-ZONA PEPE Z13 Z14 S
+       27: ENTREGAR-OBJETO PEPE Z14 ROSA1 PRINCIPE1
+       28: GIROL-JUGADOR PEPE Z14 S
+       29: IR-ZONA PEPE Z14 Z20 E
+       30: IR-ZONA PEPE Z20 Z21 E
+       31: GIROR-JUGADOR PEPE Z21 E
+       32: IR-ZONA PEPE Z21 Z22 S
+       33: IR-ZONA PEPE Z22 Z23 S
+       34: GIROR-JUGADOR PEPE Z23 S
+       35: IR-ZONA PEPE Z23 Z24 O
+       36: GIROL-JUGADOR PEPE Z24 O
+       37: IR-ZONA PEPE Z24 Z25 S
+       38: GIROL-JUGADOR PEPE Z25 S
+       39: GIROL-JUGADOR PEPE Z25 E
+       40: IR-ZONA PEPE Z25 Z24 N
+       41: GIROR-JUGADOR PEPE Z24 N
+       42: COGER-OBJETO PEPE Z24 MANZANA1
+       43: IR-ZONA PEPE Z24 Z23 E
+       44: GIROL-JUGADOR PEPE Z23 E
+       45: IR-ZONA PEPE Z23 Z22 N
+       46: IR-ZONA PEPE Z22 Z21 N
+       47: GIROL-JUGADOR PEPE Z21 N
+       48: GIROL-JUGADOR PEPE Z21 O
+       49: ENTREGAR-OBJETO PEPE Z21 MANZANA1 PRINCESA1
+       50: IR-ZONA PEPE Z21 Z22 S
+       51: COGER-OBJETO PEPE Z22 ORO1
+       52: IR-ZONA PEPE Z22 Z23 S
+       53: GIROR-JUGADOR PEPE Z23 S
+       54: IR-ZONA PEPE Z23 Z24 O
+       55: IR-ZONA PEPE Z24 Z18 O
+       56: IR-ZONA PEPE Z18 Z17 O
+       57: IR-ZONA PEPE Z17 Z16 O
+       58: IR-ZONA PEPE Z16 Z15 O
+       59: GIROR-JUGADOR PEPE Z15 O
+       60: IR-ZONA PEPE Z15 Z6 N
+       61: IR-ZONA PEPE Z6 Z5 N
+       62: GIROL-JUGADOR PEPE Z5 N
+       63: IR-ZONA PEPE Z5 Z3 O
+       64: IR-ZONA PEPE Z3 Z2 O
+       65: IR-ZONA PEPE Z2 Z1 O
+       66: GIROL-JUGADOR PEPE Z1 O
+       67: GIROL-JUGADOR PEPE Z1 S
+       68: ENTREGAR-OBJETO PEPE Z1 ORO1 BRUJA1
+       69: IR-ZONA PEPE Z1 Z2 E
+       70: IR-ZONA PEPE Z2 Z3 E
+       71: IR-ZONA PEPE Z3 Z5 E
+       72: GIROR-JUGADOR PEPE Z5 E
+       73: IR-ZONA PEPE Z5 Z6 S
+       74: IR-ZONA PEPE Z6 Z15 S
+       75: COGER-OBJETO PEPE Z15 ALGORITMO1
+       76: GIROL-JUGADOR PEPE Z15 S
+       77: IR-ZONA PEPE Z15 Z16 E
+       78: IR-ZONA PEPE Z16 Z17 E
+       79: IR-ZONA PEPE Z17 Z18 E
+       80: IR-ZONA PEPE Z18 Z24 E
+       81: GIROR-JUGADOR PEPE Z24 E
+       82: IR-ZONA PEPE Z24 Z25 S
+       83: ENTREGAR-OBJETO PEPE Z25 ALGORITMO1 PROFESOR1
+     		Coste Total: 0.00
+
+
+time spent:    0.00 seconds instantiating 1131 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 192 facts and 531 actions
+               0.00 seconds creating final representation with 186 relevant facts, 0 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.07 seconds searching, evaluating 2869 states, to a max depth of 15
+               0.07 seconds total time
+

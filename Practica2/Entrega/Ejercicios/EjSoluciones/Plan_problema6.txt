@@ -1,0 +1,78 @@
+
+ff: parsing domain file
+domain 'EJE1-DOMAIN' defined
+ ... done.
+ff: parsing problem file
+problem 'EJE1-TEST1' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+task contains conditional effects. turning off state domination.
+
+
+
+checking for cyclic := effects --- OK.
+
+ff: search configuration is EHC, if that fails then  best-first on 1*g(s) + 5*h(s) where
+    metric is  plan length
+
+Cueing down from goal distance:   13 into depth [1]
+                                  12            [1]
+                                  11            [1]
+                                  10            [1]
+                                   9            [1]
+                                   8            [1]
+                                   7            [1]
+                                   6            [1][2]
+                                   5            [1]
+                                   4            [1][2][3][4][5][6][7][8][9][10][11][12][13][14][15]
+                                   3            [1]
+                                   2            [1]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: IR-ZONA-SIN-OBJ PLAYER1 Z13 Z14 S PIEDRA
+        1: GIROL-JUGADOR PLAYER2 Z2 S
+        2: IR-ZONA-SIN-OBJ PLAYER2 Z2 Z3 E PIEDRA
+        3: GIROR-JUGADOR PLAYER1 Z14 S
+        4: IR-ZONA-SIN-OBJ PLAYER1 Z14 Z11 O PIEDRA
+        5: IR-ZONA-SIN-OBJ PLAYER2 Z3 Z5 E PIEDRA
+        6: IR-ZONA-SIN-OBJ PLAYER1 Z11 Z10 O PIEDRA
+        7: COGER-OBJETO PLAYER1 Z10 OSCAR1
+        8: IR-ZONA-SIN-OBJ PLAYER1 Z10 Z5 O PIEDRA
+        9: ENTREGAR-OBJETO PLAYER1 Z5 OSCAR1 LEO1
+       10: IR-ZONA-SIN-OBJ PLAYER2 Z5 Z10 E PIEDRA
+       11: IR-ZONA-SIN-OBJ PLAYER2 Z10 Z11 E PIEDRA
+       12: IR-ZONA-SIN-OBJ PLAYER2 Z11 Z14 E PIEDRA
+       13: IR-ZONA-SIN-OBJ PLAYER2 Z14 Z20 E PIEDRA
+       14: COGER-OBJETO PLAYER2 Z20 BIKINI1
+       15: IR-ZONA-SIN-OBJ PLAYER2 Z20 Z21 E PIEDRA
+       16: GIROR-JUGADOR PLAYER2 Z21 E
+       17: IR-ZONA-OBJ-MOCHN-BIKINI PLAYER2 Z21 Z22 S AGUA BIKINI1
+       18: GUARDAR-OBJETO PLAYER2 BIKINI1
+       19: COGER-OBJETO PLAYER2 Z22 ALGORITMO1
+       20: IR-ZONA-OBJ-MOCHN-BIKINI PLAYER2 Z22 Z23 S AGUA BIKINI1
+       21: GIROR-JUGADOR PLAYER2 Z23 S
+       22: IR-ZONA-OBJ-MOCHN-BIKINI PLAYER2 Z23 Z24 O AGUA BIKINI1
+       23: GIROL-JUGADOR PLAYER2 Z24 O
+       24: IR-ZONA-OBJ-MOCHN-BIKINI PLAYER2 Z24 Z25 S AGUA BIKINI1
+       25: ENTREGAR-OBJETO PLAYER2 Z25 ALGORITMO1 PROFESOR1
+     		Coste Total: 0.00
+
+
+time spent:    0.00 seconds instantiating 3664 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 360 facts and 1744 actions
+               0.01 seconds creating final representation with 354 relevant facts, 14 relevant fluents
+               0.01 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.39 seconds searching, evaluating 4629 states, to a max depth of 15
+               0.41 seconds total time
+
